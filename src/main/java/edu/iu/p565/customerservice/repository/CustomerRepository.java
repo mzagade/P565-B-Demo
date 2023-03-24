@@ -21,4 +21,33 @@ public class CustomerRepository {
         customers.add(customer);
         return id;
     }
+
+    public void update(Customer customer , int id)
+    {
+        Customer x = getCustomerById(id);
+        if(x!=null)
+        {
+            x.setName(customer.getName());
+            x.setEmail(customer.getEmail());
+
+        }else{
+            throw new IllegalStateException("No such customer");
+        }
+
+    }
+
+    private Customer getCustomerById(int id)
+    {return customers.stream().filter(x->x.getId()==id).findAny().orElse(null);
+    }
+
+    public void delete(int id)
+    {
+        Customer x = getCustomerById(id);
+        if(x!=null)
+        {
+            customers.remove(x);
+
+        }
+
+    }
 }
